@@ -1,0 +1,584 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-width: 400px;
+    min-height: 100vh;
+    position: absolute;
+    z-index: 0;
+}
+
+.new_cinema {
+    width: 100%;
+    display: block;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    align-items: center;
+
+}
+
+.new_cinema::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to left, transparent, black 70%);
+    /* черный цвет с 30% прозрачности */
+    z-index: 1;
+    /* чтобы псевдо-элемент был под содержимым */
+}
+
+.about_cinema {
+    width: 40%;
+    padding: 20px;
+    height: 50%;
+    color: white;
+    z-index: 1;
+    position: relative;
+    
+}
+
+.about_cinema h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    color: white;
+    font-size: 3vw;
+}
+
+.Text_for_film {
+    font-size: 1.2vw;
+}
+
+.cinema_rotations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+    /* Добавляем пространство между элементами */
+    padding: 2%;
+    
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    height:auto;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    position: relative;
+    height: auto;
+    margin: 0 20px;
+}
+
+.control {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 35px;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+.control:hover {
+    color: #00FFAA;
+    /* ярко-зеленый цвет при наведении */
+    transform: scale(1.2);
+    /* увеличивать при наведении */
+}
+
+.control:active {
+    color: #00DD88;
+    /* немного темнее при нажатии */
+}
+
+.control-left {
+    margin-right:20px;
+    /* добавляем отступ справа */
+}
+
+.control-right {
+    margin-left: 20px;
+    /* добавляем отступ слева */
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+    margin: 0 10px;
+
+}
+
+.box span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    width: 10vw; /* Задаем ширину в процентном соотношении к ширине вьюпорта */
+    height: auto;
+    padding: 2vw;
+    
+}
+
+.box span img {
+    width: 100%;
+    height: auto; /* Сохраняем пропорции изображения */
+    object-fit: cover;
+
+}
+
+.dots-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.bg_video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.carousel_trailer {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.dot {
+    width: 1vw; /* Используйте vw для ширины */
+    height: 1vw; /* Используйте vw для высоты */
+    margin: 0 0.5vw;
+    background-color: #bbb;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: width 1s ease, height 1s ease;
+}
+
+.dot.active {
+    background-color: #fff;
+    width: 1.5vw; /* Увеличенный размер для активной точки */
+    height: 1.5vw;
+}
+
+.List_of_cinemas {
+    margin: 0 auto;
+    position: relative;
+    overflow: auto;
+    width: 90%;
+    height: 400px;
+    display: flex;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    z-index: 2;
+    background: white;
+
+}
+
+.sound-toggle {
+    position: absolute;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    bottom: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    outline: none;
+    font-size: 24px;
+    transition: background-color 0.3s;
+    z-index: 1;
+}
+
+.sound-toggle:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+button {
+    cursor: pointer;
+}
+
+.control-panel {
+    width: 60px;
+    min-width: 60px;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    transition: ease-in-out 0.3s;
+    overflow: hidden;
+    border-right: 1px solid gray;
+    position: absolute;
+    z-index: 10;
+    background-color: white;
+    box-shadow: 0 0 10px 0 #000;
+
+}
+
+.control-item {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    cursor: pointer;
+}
+
+.control-icon {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    fill: #424242;
+}
+
+.control-text {
+    opacity: 0;
+    transition: ease-in-out 0.3s;
+    transition-delay: .2s;
+    margin-left: 15px;
+    white-space: nowrap;
+
+}
+
+.control-panel:hover {
+    width: 150px;
+}
+
+.control-panel:hover .control-text {
+    display: inline-block;
+    opacity: 1;
+}
+
+.All_cinemas {
+    margin-left: 60px;
+    float: left;
+    height: 100%;
+    flex-grow: 1;
+    padding: 10px;
+    overflow: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.movie-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    overflow-y: auto;
+}
+
+.movie-item {
+    width: 200px;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.movie-item img {
+    max-width: 100%;
+    height: 200px;
+    border-radius: 4px;
+}
+
+.movie-item h3 {
+    font-size: 16px;
+    margin-top: 8px;
+}
+.comments-section h3{
+    font-size: 110%;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    transform: translate(-50%, -50%);
+
+}
+
+/* Анимация появления сверху */
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 50%;
+        opacity: 1
+    }
+}
+
+.modal-content {
+    background-color: #fefefe;
+    width: 100%;
+    height: calc(63vw * 9 / 16);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    box-sizing: border-box;
+
+}
+
+.close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 101;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.video-and-comments {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+
+}
+#trailer-container {
+    flex: 1;
+    position: relative;
+    width: 70%;
+    height: calc(60vw * 9 / 16); 
+}
+#trailer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.comments-section {
+    width: 30%;
+    margin-left: 20px;
+    height: calc(70vw * 9 / 16);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+#commentsBlock
+{
+    overflow:auto;
+    height: auto;
+    max-height: 50%;
+    flex: 1;
+    flex-direction: column;
+}
+
+#commentsList li {
+    font-size: 1.5vw;
+    font-size: min(max(12px, 1.5vw), 16px);
+    border-bottom: 1px solid #ccc; /* Разделение комментариев */
+    padding: 5px 0;
+}
+
+#commentForm {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+#commentText {
+    width: 100%;
+    height: auto;
+    max-height: 20% ;
+    padding: 10px;
+    margin: 10px 0;
+    overflow: auto;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    transition: border-color 0.3s;
+    
+}
+
+#commentsList{
+    font-size: medium;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#commentText:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+#commentText:focus::placeholder {
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+button[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    /* Зеленый цвет фона */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap; /* Текст в одну строку */
+    overflow: hidden; /* Скрываем выходящий за пределы текст */
+    text-overflow: ellipsis;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+button[type="submit"] i {
+    margin-right: 5px;
+    /* Отступ иконки от текста */
+}
+#commentsList li{
+    font-size: 1.5vw;
+    font-size: min(max(12px, 1.5vw), 16px);
+}
+
+@media (max-width: 700px) {
+    .control-left {
+        margin-right:30px;
+        /* добавляем отступ справа */
+    }
+    
+    .control-right {
+        margin-left: 30px;
+        /* добавляем отступ слева */
+    }
+    
+}
+
+
+@media (max-width: 640px) {
+    .modal-content {
+        width: 100%; /* Ширина на весь экран */
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        transform: none;
+        left: 0;
+        top: 25%;
+        
+    }
+    
+    .modal {
+        padding: 0;
+    }
+    .comments-section {
+        width: 30%;
+        margin-left: 5px;
+        margin-right: 5px;
+        /* Расстояние между видео и комментариями */
+    }
+    
+    #commentText, button[type="submit"], .close {
+        font-size: 0.8em; /* Уменьшаем размер шрифта для маленьких экранов */
+    }
+    
+}
+@media (max-width: 551px) {
+    .movie-container{
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .about_cinema h1 {
+        font-size: 4vw; /* Увеличиваем размер шрифта для мобильных устройств */
+    }
+
+    .Text_for_film {
+        font-size: 2.5vw; /* Увеличиваем размер шрифта для мобильных устройств */
+    }
+
+    /* Адаптируем размеры других элементов для мобильных устройств */
+}
+
+@media (max-width: 480px) {
+    .about_cinema h1 {
+        font-size: 4vw; /* Увеличиваем размер шрифта для очень маленьких устройств */
+    }
+
+    .Text_for_film {
+        font-size: 2.5vw; /* Увеличиваем размер шрифта для очень маленьких устройств */
+    }
+
+    /* ... */
+}

@@ -1,0 +1,30 @@
+# Python
+*.py[cod]
+__pycache__/
+*.so
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Log files
+*.log
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*~
+.project
+.pydevproject
+
+# Migrations
+*/migrations/

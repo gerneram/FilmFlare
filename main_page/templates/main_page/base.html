@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'main_page/css/css.css' %}" />
+    <title>my project</title>
+  </head>
+  <body>
+    <div class="new_cinema">
+      <video class="bg_video" autoplay muted loop>
+        <source class="carousel_trailer" src="" />
+      </video>
+      <div class="about_cinema">
+        <h1 class="Title_for_film">oppenheimer</h1>
+        <p class="Text_for_film">qweqweqweqwwee</p>
+      </div>
+
+      <div class="cinema_rotations">
+        <div class="controls">
+          <button class="control control-left">&lt;</button>
+          <div class="carousel-container">
+            <div class="box">
+              {% for film in films %}
+                <span style="--i:{{ forloop.counter0 }}"><img src="https://filmstorage.s3.eu-north-1.amazonaws.com/{{ film.image }}" data-title="{{ film.title }}" data-video="https://filmstorage.s3.eu-north-1.amazonaws.com/{{ film.video }}" data-description="{{ film.description }}" /></span>
+              {% endfor %}
+            </div>
+          </div>
+          <button class="control control-right">&gt;</button>
+        </div>
+        <div class="dots-container">
+          {% for film in films %}
+            <span class="dot" data-index="{{ forloop.counter0 }}"></span>
+          {% endfor %}
+        </div>
+      </div>
+      <button class="sound-toggle" aria-label="Toggle sound">🔇</button>
+    </div>
+
+    <div class="List_of_cinemas">
+      <div class="control-panel">
+        <div class="control-item" id="All">
+          <img src="{% static 'main_page/images/cinema_website.png' %}" alt="Icon 1" class="control-icon" />
+          <span class="control-text">все фильмы</span>
+        </div>
+        <div class="control-item" id="comedy" data-id="1">
+          <img src="{% static 'main_page/images/comedy_face.png' %}" alt="Icon 1" class="control-icon" />
+          <span class="control-text">Комедии</span>
+        </div>
+        <div class="control-item" id="fantasy" data-id="2">
+          <img src="{% static 'main_page/images/wand_icon.png' %}" alt="Icon 2" class="control-icon" />
+          <span class="control-text">Фентези</span>
+        </div>
+        <div class="control-item" id="fantastic" data-id="3">
+          <img src="{% static 'main_page/images/avengers.png' %}" alt="Icon 2" class="control-icon" />
+          <span class="control-text">Фантастика</span>
+        </div>
+        <div class="control-item" id="horror" data-id="4">
+          <img src="{% static 'main_page/images/creepy-ghost-face.png' %}" alt="Icon 2" class="control-icon" />
+          <span class="control-text">Хоррор</span>
+        </div>
+        <div class="control-item" id="detective" data-id="5">
+          <img src="{% static 'main_page/images/detective.png' %}" alt="Icon 2" class="control-icon" />
+          <span class="control-text">Детектив</span>
+        </div>
+      </div>
+      <div class="cinemas All_cinemas">
+        <div class="movie-container"></div>
+      </div>
+    </div>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <!-- <span class="close">&times;</span> -->
+        <div class="video-and-comments">
+          <div id="trailer-container">
+            <iframe id="trailer" frameborder="0" allow="accelerometer; muted; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="comments-section">
+            <h3>Комментарии</h3>
+            <div id="commentsBlock">
+              <ul id="commentsList"></ul>
+            </div>
+            
+            <form id="commentForm">
+              {% csrf_token %}
+              <textarea id="commentText" placeholder="Напишите комментарий..."></textarea>
+              <button type="submit">Отправить</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'main_page/js/js.js' %}"></script>
+    <div>
+      {% include 'main_page/footer.html' %}
+    </div>
+  </body>
+</html>
